@@ -1,0 +1,39 @@
+The following queries were used to identify and handle missing data from the film table
+
+### Film Table Non-Numerical Values
+#### 1. Missing Data
+SELECT *
+FROM film
+WHERE film_id IS NULL
+OR title IS NULL
+OR description IS NULL
+OR release_year IS NULL
+OR language_id IS NULL
+OR rental_duration IS NULL
+OR rental_rate IS NULL
+OR length IS NULL
+OR replacement_cost IS NULL
+OR rating IS NULL
+OR last_update IS NULL
+OR special_features IS NULL
+OR fulltext IS NULL;
+No empty records found. 
+#### 2.Duplicate data
+SELECT film_id, title, release_year, 
+language_id, COUNT(*)
+FROM film
+GROUP BY film_id, title, release_year,
+language_id
+HAVING COUNT (*) > 1
+#### 3. Non-Uniform Data
+SELECT title, COUNT(*) AS
+title_count
+FROM film
+GROUP BY title
+ORDER BY title_count DESC
+#### 4. Numerical Values
+SELECT COUNT(*) AS total_films
+MIN(film_id) AS min_film_id,
+MAX(film_id) AS max_film_id,
+AVG(release_year) AS avg_release_year.....
+So on and so forth for all numerical columns
